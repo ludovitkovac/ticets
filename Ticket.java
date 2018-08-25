@@ -101,4 +101,9 @@ public class Ticket {
 		
 		return pocetVsetkychVyhierBezNajnizsej;
 	}
+	
+	public Double getHodnotenieZrebu() {
+		
+		return 0.00;
+	}
 }
