@@ -31,12 +31,7 @@ public class ZrebAnalyzer {
 		    System.out.println(key + " " + value);
 		}
 	}
-	
-	public static Double vypocetHodnotyTicketu(Ticket ticket) {
-		
-		return 1.11;
-	}
-	
+
 	public static ArrayList<Ticket> getTicketList() {
 
 		// TIPOS URL podstránky Žreby
