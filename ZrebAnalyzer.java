@@ -1,8 +1,10 @@
 package com.luigi;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map.Entry;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,9 +14,27 @@ import org.jsoup.select.Elements;
 public class ZrebAnalyzer {
 	
 	public static void main(String[] args) {
+		HashMap<String, Double> hodnotenieTiketu = new HashMap<String, Double>();
+
 		ArrayList<Ticket> tickets = getTicketList();
 		
+		for (Iterator<Ticket> iterator = tickets.iterator(); iterator.hasNext();) {
+			Ticket ticket = iterator.next();
+			
+			hodnotenieTiketu.put(ticket.getNazov(), ticket.getHodnotenieZrebu());
+		}
 		
+		for (Entry<String, Double> entry : hodnotenieTiketu.entrySet()) {
+		    String key = entry.getKey();
+		    Double value = entry.getValue();
+		    
+		    System.out.println(key + " " + value);
+		}
+	}
+	
+	public static Double vypocetHodnotyTicketu(Ticket ticket) {
+		
+		return 1.11;
 	}
 	
 	public static ArrayList<Ticket> getTicketList() {
@@ -88,7 +108,7 @@ public class ZrebAnalyzer {
 						int lastIndex = element.text().indexOf(" #");
 						nazovZrebu = element.text().substring(0, lastIndex);
 						ticket.setNazov(nazovZrebu);
-						System.out.println(nazovZrebu);
+						// System.out.println(nazovZrebu);
 					}
 				}	
 			}
@@ -108,7 +128,7 @@ public class ZrebAnalyzer {
 							String sCena = liElement.text().substring(beginIndex, endIndex);
 							Double dCena = Double.valueOf(sCena.replace(",", "."));
 							ticket.setCena(dCena);
-							System.out.println(dCena);
+							// System.out.println(dCena);
 						}
 
 						if (liElement.text().contains("Pravdepodobnosť výhry je až 1 : ") ||
@@ -130,7 +150,7 @@ public class ZrebAnalyzer {
 							String sPravdepodobnost = liElement.text().substring(beginIndex, endIndex);
 							Double dPravdepodobnost = Double.valueOf(sPravdepodobnost.replace(",", "."));
 							ticket.setPravdepodobnostVyhry(dPravdepodobnost);
-							System.out.println(dPravdepodobnost);
+							// System.out.println(dPravdepodobnost);
 						}
 					}	
 					
